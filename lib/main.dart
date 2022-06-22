@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: "Awesome App",
+    title: "Fire Blaster",
     home: HomePage(),
+    theme: ThemeData(primarySwatch: Colors.red),
   ));
 }
 
@@ -12,48 +12,46 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Krishna Grocery"),
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.amber,
+      appBar: AppBar(
+        title: const Text("Fire Blaster"),
+        centerTitle: true,
+      ),
+      body: Container(),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            // DrawerHeader(
+            //     child: Text(
+            //       "Hi, I am Drawer",
+            //       style: TextStyle(color: Colors.white),
+            //     ),
+            //     decoration: BoxDecoration(color: Colors.purple)),
+            UserAccountsDrawerHeader(
+              accountName: Text("FireBlaster"),
+              accountEmail: Text("fire.blaster@gmail.com"),
+              currentAccountPicture: Image.network(
+                  "https://images.unsplash.com/photo-1655720406100-3f1eda0a4519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text("User"),
+              subtitle: Text("FireBlaster"),
+              trailing: Icon(Icons.edit),
+            ),
+            ListTile(
+              leading: Icon(Icons.email),
+              title: Text("Email"),
+              subtitle: Text("fire.blaster@gmail.com"),
+              trailing: Icon(Icons.send),
+            ),
+          ],
         ),
-        body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                color: Colors.black,
-                width: 280,
-                height: 480,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        width: 100,
-                        height: 100,
-                        color: Colors.red,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        width: 100,
-                        height: 100,
-                        color: Colors.green,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        width: 100,
-                        height: 100,
-                        color: Colors.blue,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )));
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.edit),
+      ),
+    );
   }
 }
