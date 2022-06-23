@@ -1,21 +1,31 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: file_names, use_key_in_widget_constructors, prefer_typing_uninitialized_variables, avoid_print
 
-import '../changeNameCard.dart';
+import 'package:flutter/material.dart';
+import 'dart:convert';
 import '../drawer.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   var myText = "Login";
+  var url = "https://jsonplaceholder.typicode.com/photos";
+  var data;
   @override
   void initState() {
     super.initState();
+    getData();
+  }
+
+  getData() async {
+    var res = await http.get(Uri.parse(url));
+    // print(res.body);
+    data = jsonDecode(res.body);
+    setState(() {});
   }
 
   @override
@@ -27,14 +37,22 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Card(
-            child:
-                changeNameCard(myText: myText, nameController: _nameController),
-          ),
-        ),
-      ),
+          padding: const EdgeInsets.all(16.0),
+          child: data != null
+              ? ListView.builder(
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: Image.network(data[index]["url"]),
+                        title: Text(data[index]["title"]),
+                      ),
+                    );
+                  },
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                )),
       drawer: MyDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
