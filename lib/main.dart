@@ -8,6 +8,7 @@ void main() {
   ));
 }
 
+// ignore: use_key_in_widget_constructors
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,18 +21,15 @@ class HomePage extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: <Widget>[
-            // DrawerHeader(
-            //     child: Text(
-            //       "Hi, I am Drawer",
-            //       style: TextStyle(color: Colors.white),
-            //     ),
-            //     decoration: BoxDecoration(color: Colors.purple)),
+          children: const <Widget>[
             UserAccountsDrawerHeader(
               accountName: Text("FireBlaster"),
               accountEmail: Text("fire.blaster@gmail.com"),
-              currentAccountPicture: Image.network(
-                  "https://images.unsplash.com/photo-1655720406100-3f1eda0a4519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://media.istockphoto.com/photos/evil-skull-in-flames-and-smoke-picture-id483530145?k=20&m=483530145&s=612x612&w=0&h=BESMbH43tJqfHS85mPMT3mhzq0Ja0eshNSzaoAEgNNk=",
+                ),
+              ),
             ),
             ListTile(
               leading: Icon(Icons.person),
@@ -44,6 +42,12 @@ class HomePage extends StatelessWidget {
               title: Text("Email"),
               subtitle: Text("fire.blaster@gmail.com"),
               trailing: Icon(Icons.send),
+            ),
+            ListTile(
+              leading: Icon(Icons.phone),
+              title: Text("Phone"),
+              subtitle: Text("7894567850"),
+              trailing: Icon(Icons.mobile_friendly),
             ),
           ],
         ),
