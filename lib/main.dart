@@ -1,11 +1,15 @@
+import 'package:demo/pages/HomePage.dart';
+import 'package:demo/pages/LoginPage.dart';
 import 'package:flutter/material.dart';
-
-import 'pages/HomePage.dart';
 
 void main() {
   runApp(MaterialApp(
     title: "Fire Blaster",
-    home: HomePage(),
+    home: LoginPage(),
     theme: ThemeData(primarySwatch: Colors.red),
+    routes: {
+      "/Login": (context) => LoginPage(),
+      "/home": (context) => HomePage()
+    },
   ));
 }
