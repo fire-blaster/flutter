@@ -36,7 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.4
   webview_flutter: ^3.0.4
-  
+  flutter_launcher_icons: ^0.9.3
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/fb_icon.png"
 
 dev_dependencies:
   flutter_test:

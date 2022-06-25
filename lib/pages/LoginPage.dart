@@ -1,81 +1,104 @@
-// ignore_for_file: deprecated_member_use, use_key_in_widget_constructors, file_names
-
-import 'package:demo/widgets/bgImage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController userName = TextEditingController();
+  final TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Login Page'),
-        ),
-        body: Stack(
-          fit: StackFit.expand,
-          children: [
-            bgImage(),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Form(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                decoration: const InputDecoration(
-                                    hintText: "Enter Username",
-                                    labelText: "Username"),
-                              ),
-                              const SizedBox(
-                                height: 28,
-                              ),
-                              TextFormField(
-                                obscureText: true,
-                                decoration: const InputDecoration(
-                                    hintText: "Enter Password",
-                                    labelText: "Password"),
-                              ),
-                            ],
-                          ),
-                        )),
-                        const SizedBox(
-                          height: 28,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: RaisedButton(
-                            onPressed: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => HomePage()));
-                              Navigator.pushNamed(context, "/home");
-                            },
-                            child: const Text("SignIn"),
-                            color: Colors.blue,
-                            textColor: Colors.white,
-                          ),
-                        )
-                      ],
-                    ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Login"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              const Text("User Name"),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: userName,
+                decoration: InputDecoration(
+                  hintText: "Enter User Name",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(),
                   ),
                 ),
+
+                // The validator receives the text that the user has entered.
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter User Name';
+                  }
+                  return null;
+                },
               ),
-            ),
-          ],
-        ));
+              const SizedBox(
+                height: 10,
+              ),
+              const Text("Password"),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                obscureText: true,
+                controller: password,
+                decoration: InputDecoration(
+                  hintText: "Enter Password",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(),
+                  ),
+                ),
+
+                // The validator receives the text that the user has entered.
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter Password';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(content: Text('Processing Data')),
+                    // );
+                    // print(
+                    //     "User Name:-${userName.text}, Password:-${password.text}");
+                    Map userRegisterData = {
+                      "username": userName.text,
+                      "password": password.text,
+                    };
+                    Navigator.pushNamed(context, "/home");
+                  } else {
+                    // print("Invalid");
+                  }
+                },
+                child: const Text('Login'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
