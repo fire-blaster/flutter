@@ -1,8 +1,8 @@
-// ignore_for_file: file_names, use_key_in_widget_constructors, prefer_typing_uninitialized_variables, avoid_print
+// ignore_for_file: prefer_typing_uninitialized_variables, use_key_in_widget_constructors, file_names
 
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import '../drawer.dart';
+import '../widgets/drawer.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -35,6 +35,14 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("Fire Blaster"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, "/Login");
+            },
+          )
+        ],
       ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -56,8 +64,9 @@ class _HomePageState extends State<HomePage> {
       drawer: MyDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          myText = _nameController.text;
-          setState(() {});
+          // myText = _nameController.text;
+          // setState(() {});
+          Navigator.pushNamed(context, "/vector");
         },
         child: const Icon(Icons.refresh_rounded),
       ),

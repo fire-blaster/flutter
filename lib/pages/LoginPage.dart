@@ -1,5 +1,6 @@
-import 'package:demo/bgImage.dart';
-import 'package:demo/pages/HomePage.dart';
+// ignore_for_file: deprecated_member_use, use_key_in_widget_constructors, file_names
+
+import 'package:demo/widgets/bgImage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Login Page'),
+          title: const Text('Login Page'),
         ),
         body: Stack(
           fit: StackFit.expand,
@@ -34,23 +35,23 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             children: [
                               TextFormField(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: "Enter Username",
                                     labelText: "Username"),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 28,
                               ),
                               TextFormField(
                                 obscureText: true,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: "Enter Password",
                                     labelText: "Password"),
                               ),
                             ],
                           ),
                         )),
-                        SizedBox(
+                        const SizedBox(
                           height: 28,
                         ),
                         Padding(
@@ -63,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                               //         builder: (context) => HomePage()));
                               Navigator.pushNamed(context, "/home");
                             },
-                            child: Text("SignIn"),
+                            child: const Text("SignIn"),
                             color: Colors.blue,
                             textColor: Colors.white,
                           ),
